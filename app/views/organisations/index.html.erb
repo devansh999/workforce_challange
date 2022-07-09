@@ -1,0 +1,28 @@
+<h1>Adnat</h1>
+
+<% if current_user.organisation.present? %>
+  <%= render 'actions_overview' %>
+<% else%>
+
+  <h2>List Of Organisations</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Hourly Rate</th>
+    </tr>
+    <% @organisations.each do |organisation| %>
+    <tr>
+      <td><%= organisation.id %></td>
+      <td><%= organisation.name %></td>
+      <td><%= organisation.hourly_rate %></td>
+      <td><%= link_to "Edit", edit_organisation_path(organisation) %></td>
+      <td><%= link_to "Join", join_organisation_path(organisation), data: { turbo_method: :put } %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <h1>Create New Organisation</h1>
+
+  <%= render "form", organisation: @organisation %>
+<% end %>

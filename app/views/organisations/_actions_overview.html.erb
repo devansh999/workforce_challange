@@ -1,0 +1,5 @@
+<h1><%= current_user.organisation.name %></h1>
+
+<%= link_to "View Shifts", edit_organisation_path(current_user.organisation) %>
+<%= link_to "Edit", edit_organisation_path(current_user.organisation) %>
+<%= link_to "Leave", leave_organisation_path(current_user.organisation), data: { turbo_method: :put } %>

@@ -1,0 +1,9 @@
+<h1>Adnat</h1>
+
+<h2>Edit</h2>
+
+
+<%= render "form", organisation: @organisation %>
+<div>
+  <%= link_to "Delete", organisation_path(@organisation), data: { turbo_method: :delete, turbo_confirm: :'Are you sure ?' } %>
+</div>
