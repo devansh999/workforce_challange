@@ -4,7 +4,7 @@
 
 <h3>Shifts</h3>
 
-  <table>
+  <table border="2">
     <tr>
       <th>Employee Name</th>
       <th>Shift Date</th>
@@ -25,38 +25,14 @@
       <td><%= shift.shift_cost %></td>
     </tr>
     <% end %>
+    <tr>
+      <%= form_with model: @shift do |form| %>
+        <td><%= form.text_field :employee_name, value: current_user.name, disabled: true %></td>
+        <td><%= form.date_field :start %></td>
+        <td><%= form.time_field :start %></td>
+        <td><%= form.time_field :finish %></td>
+        <td><%= form.number_field :break_length %></td>
+        <td colspan="2"><%= form.submit %></td>
+      <% end %>
+    </tr>
   </table>
-
-<h2>Create your shift</h2>
-
-<%= form_with model: @shift do |form| %>
-  <div>
-    <%= form.label :employee_name %><br>
-    <%= form.text_field :employee_name %>
-  </div>
-
-  <div>
-    <%= form.label :start %><br>
-    <%= form.date_field :start %>
-  </div>
-
-  <div>
-    <%= form.label :start %><br>
-    <%= form.time_field :start %>
-  </div>
-
-  <div>
-    <%= form.label :finish %><br>
-    <%= form.time_field :finish %>
-  </div>
-
-  <div>
-    <%= form.label :break_length %><br>
-    <%= form.number_field :break_length %>
-  </div>
-
-  <br>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
