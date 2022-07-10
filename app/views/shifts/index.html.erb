@@ -3,3 +3,60 @@
 <h2><%= current_user.organisation.name %></h2>
 
 <h3>Shifts</h3>
+
+  <table>
+    <tr>
+      <th>Employee Name</th>
+      <th>Shift Date</th>
+      <th>Start Time</th>
+      <th>Finish Time</th>
+      <th>Break Length</th>
+      <th>Hours Worked</th>
+      <th>Shift Cost</th>
+    </tr>
+     <% @shifts.each do |shift| %>
+    <tr>
+      <td><%= shift.employee_name %></td>
+      <td><%= shift.start %></td>
+      <td><%= shift.start %></td>
+      <td><%= shift.finish %></td>
+      <td><%= shift.break_length %></td>
+      <td><%= shift.hours_worked %></td>
+      <td><%= shift.shift_cost %></td>
+    </tr>
+    <% end %>
+  </table>
+
+<h2>Create your shift</h2>
+
+<%= form_with model: @shift do |form| %>
+  <div>
+    <%= form.label :employee_name %><br>
+    <%= form.text_field :employee_name %>
+  </div>
+
+  <div>
+    <%= form.label :start %><br>
+    <%= form.date_field :start %>
+  </div>
+
+  <div>
+    <%= form.label :start %><br>
+    <%= form.time_field :start %>
+  </div>
+
+  <div>
+    <%= form.label :finish %><br>
+    <%= form.time_field :finish %>
+  </div>
+
+  <div>
+    <%= form.label :break_length %><br>
+    <%= form.number_field :break_length %>
+  </div>
+
+  <br>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

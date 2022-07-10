@@ -1,5 +1,3 @@
 class ApplicationController < ActionController::Base
-	def index
-    @shifts = Shift.all
-  end
+	before_action :authenticate_user!
 end
