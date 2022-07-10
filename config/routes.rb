@@ -13,4 +13,5 @@ Rails.application.routes.draw do
       put :leave
     end
   end
+  resources :shifts
 end
