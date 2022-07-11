@@ -4,12 +4,15 @@ class ShiftsController < ApplicationController
   end
 
   def create
-    
+
     user = User.find_by(name: shift_params[:employee_name])
     @shift = Shift.new(shift_params.merge({user_id: user&.id}))
 
     if @shift.save
-      redirect_to @shifts, notice: "Successfully created organisation"
+
+      hash={employee_name: @shift.employee_name, start_date: @shift.start.strftime("%m/ %d/ %y"),
+       start_time: @shift.start.strftime("%H:%M"), finish: @shift.finish, break_length: @shift.break_length}
+      render json: hash
     else
       render :new, status: :unprocessable_entity
     end
