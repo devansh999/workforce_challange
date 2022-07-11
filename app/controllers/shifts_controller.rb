@@ -4,7 +4,9 @@ class ShiftsController < ApplicationController
   end
 
   def create
-    @shift = Shift.new(shift_params)
+    
+    user = User.find_by(name: shift_params[:employee_name])
+    @shift = Shift.new(shift_params.merge({user_id: user&.id}))
 
     if @shift.save
       redirect_to @shifts, notice: "Successfully created organisation"
@@ -17,6 +19,6 @@ class ShiftsController < ApplicationController
   private
 
   def shift_params
-    params.require(:shift).permit(:employee_name, :start, :finish, :break_length)
+    params.permit(:employee_name, :finish, :break_length).merge({start: params.permit(:start_date)[:start_date] + " " + params.permit(:start_time)[:start_time]})
   end
 end

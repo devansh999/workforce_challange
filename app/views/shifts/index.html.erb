@@ -26,13 +26,34 @@
     </tr>
     <% end %>
     <tr>
-      <%= form_with model: @shift do |form| %>
-        <td><%= form.text_field :employee_name, value: current_user.name, disabled: true %></td>
-        <td><%= form.date_field :start %></td>
-        <td><%= form.time_field :start %></td>
-        <td><%= form.time_field :finish %></td>
-        <td><%= form.number_field :break_length %></td>
-        <td colspan="2"><%= form.submit %></td>
+      <%= form_tag "/shifts", id: 'shift_form' do %>
+        <td><%= text_field_tag :employee_name, current_user.name %></td>
+        <td><%= date_field_tag :start_date %></td>
+        <td><%= time_field_tag :start_time %></td>
+        <td><%= time_field_tag :finish %></td>
+        <td><%= number_field_tag :break_length %></td>
+        <td colspan="2"><%= submit_tag %></td>
       <% end %>
     </tr>
   </table>
+
+<script type="text/javascript">
+  $("#shift_form").submit(function(){
+    $.ajax({
+      url: "/shifts",
+      method: "POST",
+      data: {
+        employee_name: $("#employee_name").val(),
+        start_date: $("#start_date").val(),
+        start_time: $("#start_time").val(),
+        finish: $("#finish").val(),
+        break_length: $("#break_length").val(),
+
+      },
+      success: function(result){
+        console.log(result);
+      }
+    });
+    return false;
+  });
+</script>
