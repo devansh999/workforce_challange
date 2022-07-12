@@ -10,7 +10,7 @@
       <th>Shift Date</th>
       <th>Start Time</th>
       <th>Finish Time</th>
-      <th>Break Length</th>
+      <th>Break Length (minutes)</th>
       <th>Hours Worked</th>
       <th>Shift Cost</th>
     </tr>
@@ -19,21 +19,21 @@
     <tr>
       <td><%= shift.employee_name %></td>
       <td><%= shift.start&.strftime("%m/ %d/ %y") %></td>
-      <td><%= shift.start&.strftime("%H:%M") %></td>
-      <td><%= shift.finish %></td>
+      <td><%= shift.start&.strftime("%I:%M %p") %></td>
+      <td><%= shift.finish&.strftime("%I:%M %p") %></td>
       <td><%= shift.break_length %></td>
       <td><%= shift.hours_worked %></td>
-      <td><%= shift.shift_cost %></td>
+      <td><%= shift.cost %></td>
     </tr>
     <% end %>
-    
+
     <tr id="shift_row">
       <%= form_tag "/shifts", id: 'shift_form' do %>
         <td><%= text_field_tag :employee_name, current_user.name %></td>
-        <td><%= date_field_tag :start_date %></td>
-        <td><%= time_field_tag :start_time %></td>
-        <td><%= time_field_tag :finish %></td>
-        <td><%= number_field_tag :break_length %></td>
+        <td><%= date_field_tag :start_date, nil, required: true %></td>
+        <td><%= time_field_tag :start_time, nil, required: true %></td>
+        <td><%= time_field_tag :finish, nil, required: true %></td>
+        <td><%= number_field_tag :break_length, nil, required: true %></td>
         <td colspan="2"><%= submit_tag %></td>
       <% end %>
     </tr>
@@ -53,9 +53,16 @@
 
       },
       success: function(result){
-        console.log(result);
-        debugger;
-        $("<tr><td>"+result.employee_name+"</td><td>"+result.start_date+"</td><td>"+result.start_time+"</td><td>"+result.finish+"</td><td>"+result.break_length+"</td></tr>").insertBefore($("#shift_row"))
+        $(
+          "<tr><td>"+result.employee_name+
+          "</td><td>"+result.start_date+
+          "</td><td>"+result.start_time+
+          "</td><td>"+result.finish+
+          "</td><td>"+result.break_length+
+          "</td><td>"+result.hours_worked+
+          "</td><td>"+result.cost+
+          "</td></tr>"
+        ).insertBefore($("#shift_row"))
       }
     });
     return false;

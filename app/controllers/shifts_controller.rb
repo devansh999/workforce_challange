@@ -9,10 +9,15 @@ class ShiftsController < ApplicationController
     @shift = Shift.new(shift_params.merge({user_id: user&.id}))
 
     if @shift.save
-
-      hash={employee_name: @shift.employee_name, start_date: @shift.start.strftime("%m/ %d/ %y"),
-       start_time: @shift.start.strftime("%H:%M"), finish: @shift.finish, break_length: @shift.break_length}
-      render json: hash
+      render json: {
+        employee_name: @shift.employee_name,
+        start_date: @shift.start.strftime("%m/ %d/ %y"),
+        start_time: @shift.start.strftime("%H:%M"),
+        finish: @shift.finish,
+        break_length: @shift.break_length,
+        cost: @shift.cost,
+        hours_worked: @shift.hours_worked
+      }
     else
       render :new, status: :unprocessable_entity
     end
