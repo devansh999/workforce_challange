@@ -37,6 +37,7 @@ class OrganisationsController < ApplicationController
 
   def leave
     current_user.update(organisation_id: nil)
+    Shift.where(user_id: current_user.id).delete_all
 
     redirect_to root_path, status: :see_other, notice: "Successfully Left organisation"
   end
