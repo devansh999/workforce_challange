@@ -24,6 +24,9 @@
       <td><%= shift.break_length %></td>
       <td><%= shift.hours_worked %></td>
       <td><%= shift.cost %></td>
+      <td><%= link_to "Edit", organisations_path(@organisation) %></td>
+      <td><%= link_to "Delete", shifts_path(@shifts), data:
+             { turbo_method: :delete, turbo_confirm:     :'Are you sure ?' } %></td>
     </tr>
     <% end %>
 

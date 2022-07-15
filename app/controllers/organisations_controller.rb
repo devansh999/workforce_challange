@@ -49,7 +49,7 @@ class OrganisationsController < ApplicationController
   end
 
   def set_organization
-    # binding.pry
+
     @organisation = Organisation.find(params[:id])
   end
 

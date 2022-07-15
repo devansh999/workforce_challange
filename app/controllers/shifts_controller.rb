@@ -24,6 +24,13 @@ class ShiftsController < ApplicationController
     end
   end
 
+  def destroy
+    @shift = Shift.find(params[:id])
+    @shift.destroy
+    redirect_to root_path, status: :see_other, notice: "Successfully destroyed organisation"
+  end
+
+
 
   private
 
