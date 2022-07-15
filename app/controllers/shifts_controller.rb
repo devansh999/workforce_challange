@@ -28,6 +28,8 @@ class ShiftsController < ApplicationController
   private
 
   def shift_params
-    params.permit(:employee_name, :finish, :break_length).merge({start: params.permit(:start_date)[:start_date] + " " + params.permit(:start_time)[:start_time]})
+    params.permit(:employee_name, :finish, :break_length).
+    merge({start: params.permit(:start_date)[:start_date]
+     + " " + params.permit(:start_time)[:start_time]})
   end
 end

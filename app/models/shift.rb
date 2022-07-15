@@ -3,6 +3,8 @@ class Shift < ApplicationRecord
 
   delegate :hourly_rate, to: :user, allow_nil: true
 
+  validates :finish, comparison: { greater_than: :start }
+
   def break_length_in_minutes
     break_length.to_f/60
   end
