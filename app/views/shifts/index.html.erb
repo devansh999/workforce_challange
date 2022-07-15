@@ -38,10 +38,16 @@
       <% end %>
     </tr>
   </table>
+
+  <div id="Shift_errors">
+
+
+
+  </div>
   <p><%= link_to "Back", organisations_path(@organisation) %></p>
 
 <script type="text/javascript">
-  $("#shift_form").submit(function(){
+    $("#shift_form").submit(function(){
     $.ajax({
       url: "/shifts",
       method: "POST",
@@ -53,17 +59,23 @@
         break_length: $("#break_length").val(),
 
       },
-      success: function(result){
+      success: function(response){
         $(
-          "<tr><td>"+result.employee_name+
-          "</td><td>"+result.start_date+
-          "</td><td>"+result.start_time+
-          "</td><td>"+result.finish+
-          "</td><td>"+result.break_length+
-          "</td><td>"+result.hours_worked+
-          "</td><td>"+result.cost+
+          "<tr><td>"+response.employee_name+
+          "</td><td>"+response.start_date+
+          "</td><td>"+response.start_time+
+          "</td><td>"+response.finish+
+          "</td><td>"+response.break_length+
+          "</td><td>"+response.hours_worked+
+          "</td><td>"+response.cost+
           "</td></tr>"
-        ).insertBefore($("#shift_row"))
+        ).insertBefore($("#shift_row"));
+        $("#Shift_errors").html("")
+      },
+      error: function(response){
+
+        $("#Shift_errors").html(response.responseJSON.message)
+
       }
     });
     return false;
