@@ -36,15 +36,17 @@
       <% end %>
 
     <tr id="shift_row">
-      <%= form_tag "/shifts", id: 'shift_form' do %>
+
         <td><%= text_field_tag :employee_name, current_user.name %>
-          <%= hidden_field_tag :employee_id, current_user.id %></td>
+          </td>
         <td><%= date_field_tag :start_date, nil, required: true %></td>
         <td><%= time_field_tag :start_time, nil, required: true %></td>
         <td><%= time_field_tag :finish, nil, required: true %></td>
         <td><%= number_field_tag :break_length, nil, required: true %></td>
-        <td colspan="2"><%= submit_tag %></td>
-      <% end %>
+        <td colspan="2">
+          <button onclick="submitForm()">Save Shift</button>
+        </td>
+
     </tr>
   </table>
   </turbo-frame>
@@ -54,10 +56,9 @@
 
   </div>
   <p><%= link_to "Back", organisations_path(@organisation) %></p>
-
+<input type="hidden" name="employee_id" id="employee_id" value="<%= current_user.id %>">
 <script type="text/javascript">
-  $( document ).ready(function() {
-    $("#shift_form").on("submit", function(){
+  function submitForm(){
     $.ajax({
       url: "/shifts",
       method: "POST",
@@ -70,7 +71,6 @@
 
       },
       success: function(response){
-        $("#employee_id").val(""),
         $("#start_date").val(""),
         $("#start_time").val(""),
         $("#finish").val(""),
@@ -95,6 +95,5 @@
       }
     });
     return false;
-  });
-    });
+  }
 </script>
