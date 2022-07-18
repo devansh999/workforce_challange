@@ -4,9 +4,9 @@
 
 <h3>Shifts</h3>
 
-<form action="<%= search_shifts_path %>" data-turbo-frame="shifts_frame">
+<form action="<%= search_shifts_path %>" data-turbo-frame="shifts_frame"    >
   <%= text_field_tag :employee_name, "", id: "search_employee_name" %>
-  <%= submit_tag "Search" %>
+  <%= submit_tag "Search", id: "formSubmit", disabled: true %>
 </form>
 
 
@@ -37,7 +37,8 @@
 
     <tr id="shift_row">
       <%= form_tag "/shifts", id: 'shift_form' do %>
-        <td><%= text_field_tag :employee_name, current_user.name %></td>
+        <td><%= text_field_tag :employee_name, current_user.name %>
+          <%= hidden_field_tag :employee_id, current_user.id %></td>
         <td><%= date_field_tag :start_date, nil, required: true %></td>
         <td><%= time_field_tag :start_time, nil, required: true %></td>
         <td><%= time_field_tag :finish, nil, required: true %></td>
@@ -55,12 +56,13 @@
   <p><%= link_to "Back", organisations_path(@organisation) %></p>
 
 <script type="text/javascript">
-    $("#shift_form").submit(function(){
+  $( document ).ready(function() {
+    $("#shift_form").on("submit", function(){
     $.ajax({
       url: "/shifts",
       method: "POST",
       data: {
-        employee_name: $("#employee_name").val(),
+        employee_id: $("#employee_id").val(),
         start_date: $("#start_date").val(),
         start_time: $("#start_time").val(),
         finish: $("#finish").val(),
@@ -68,6 +70,12 @@
 
       },
       success: function(response){
+        $("#employee_id").val(""),
+        $("#start_date").val(""),
+        $("#start_time").val(""),
+        $("#finish").val(""),
+        $("#break_length").val(""),
+
         $(
           "<tr><td>"+response.employee_name+
           "</td><td>"+response.start_date+
@@ -88,4 +96,5 @@
     });
     return false;
   });
+    });
 </script>

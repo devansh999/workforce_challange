@@ -30,6 +30,7 @@ class OrganisationsController < ApplicationController
   end
 
   def join
+    binding.pry
     current_user.update(organisation_id: params[:id])
 
     redirect_to root_path, status: :see_other, notice: "Successfully Joined organisation"

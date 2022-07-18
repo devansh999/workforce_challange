@@ -5,9 +5,8 @@ class ShiftsController < ApplicationController
   end
 
   def create
-
-    user = User.find_by(name: shift_params[:employee_name])
-    @shift = Shift.new(shift_params.merge({user_id: user&.id}))
+    user = User.find_by(id: params[:employee_id])
+    @shift = Shift.new(shift_params.merge({user_id: user&.id, employee_name: user&.name}))
 
     if @shift.save
       render json: {
@@ -40,7 +39,7 @@ end
     start_date = params.permit(:start_date)[:start_date]
     start_time = params.permit(:start_time)[:start_time]
     finish = params.permit(:finish)[:finish]
-    params.permit(:employee_name, :finish, :break_length).merge({start: start_date + " " + start_time }).merge({finish: start_date + " " + finish })
+    params.permit(:finish, :break_length).merge({start: start_date + " " + start_time }).merge({finish: start_date + " " + finish })
 
   end
 end
