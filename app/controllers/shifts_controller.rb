@@ -30,7 +30,9 @@ class ShiftsController < ApplicationController
     redirect_to root_path, status: :see_other, notice: "Successfully destroyed organisation"
   end
 
-
+def search
+  @shifts = Shift.where(employee_name: params[:employee_name])
+end
 
   private
 

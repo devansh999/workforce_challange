@@ -4,6 +4,13 @@
 
 <h3>Shifts</h3>
 
+<form action="<%= search_shifts_path %>" data-turbo-frame="shifts_frame">
+  <%= text_field_tag :employee_name %>
+  <%= submit_tag "Search" %>
+</form>
+
+
+  <turbo-frame id="shifts_frame">
   <table border="2" id="shift_table">
     <tr>
       <th>Employee Name</th>
@@ -15,20 +22,20 @@
       <th>Shift Cost</th>
     </tr>
     <tr ></tr>
-     <% @shifts.each do |shift| %>
-    <tr>
-      <td><%= shift.employee_name %></td>
-      <td><%= shift.start&.strftime("%m/ %d/ %y") %></td>
-      <td><%= shift.start&.strftime("%I:%M %p") %></td>
-      <td><%= shift.finish&.strftime("%I:%M %p") %></td>
-      <td><%= shift.break_length %></td>
-      <td><%= shift.hours_worked %></td>
-      <td><%= shift.cost %></td>
-      <td><%= link_to "Edit", organisations_path(@organisation) %></td>
-      <td><%= link_to "Delete", shifts_path(@shifts), data:
-             { turbo_method: :delete, turbo_confirm:     :'Are you sure ?' } %></td>
-    </tr>
-    <% end %>
+
+      <% @shifts.each do |shift| %>
+        <tr>
+          <td><%= shift.employee_name %></td>
+          <td><%= shift.start&.strftime("%m/ %d/ %y") %></td>
+          <td><%= shift.start&.strftime("%I:%M %p") %></td>
+          <td><%= shift.finish&.strftime("%I:%M %p") %></td>
+          <td><%= shift.break_length %></td>
+          <td><%= shift.hours_worked %></td>
+          <td><%= shift.cost %></td>
+          <td><%= link_to "Edit", organisations_path(@organisation) %></td>
+          <td><%= link_to("Delete", shift_path(shift), method: :delete) %></td>
+        </tr>
+      <% end %>
 
     <tr id="shift_row">
       <%= form_tag "/shifts", id: 'shift_form' do %>
@@ -41,7 +48,7 @@
       <% end %>
     </tr>
   </table>
-
+  </turbo-frame>
   <div id="Shift_errors">
 
 

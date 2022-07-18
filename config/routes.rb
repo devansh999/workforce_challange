@@ -13,5 +13,9 @@ Rails.application.routes.draw do
       put :leave
     end
   end
-  resources :shifts
+  resources :shifts do
+    collection do
+      get :search
+    end
+  end
 end
