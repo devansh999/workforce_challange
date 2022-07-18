@@ -6,7 +6,7 @@
 
 <form action="<%= search_shifts_path %>" data-turbo-frame="shifts_frame"    >
   <%= text_field_tag :employee_name, "", id: "search_employee_name" %>
-  <%= submit_tag "Search", id: "formSubmit", disabled: true %>
+  <%= submit_tag "Search", id: "formSubmit" %>
 </form>
 
 
@@ -31,7 +31,7 @@
           <td><%= shift.finish&.strftime("%I:%M %p") %></td>
           <td><%= shift.break_length %></td>
           <td><%= shift.hours_worked %></td>
-          <td><%= shift.cost %></td>
+          <td><%= shift.cost %>$</td>
         </tr>
       <% end %>
 
