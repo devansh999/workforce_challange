@@ -1,7 +1,7 @@
 class ShiftsController < ApplicationController
 	def index
-    @users = current_user.organisation.users
-    @shifts = Shift.where(user_id: @users.pluck(:id))
+    @users = current_user.organisation&.users
+    @shifts = Shift.where(user_id: @users&.pluck(:id))
   end
 
   def create

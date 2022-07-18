@@ -15,6 +15,7 @@ class Shift < ApplicationRecord
   end
 
   def cost
+
     (hours_worked * hourly_rate).round(2)
   end
 end
