@@ -1,10 +1,14 @@
+require 'rails_helper'
+require 'spec_helper'
+
 RSpec.describe Shift, type: :model do
   subject do
     described_class.new(
-      employee_name: "johndoe",
+      employee_name: Faker::Name.name,
       start: DateTime.now,
       finish: DateTime.now + 3.hours,
-      break_length: 10 )
+      break_length: Faker::Number
+      )
   end
   describe "Validations" do
 

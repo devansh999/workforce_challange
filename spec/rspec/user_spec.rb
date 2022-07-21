@@ -4,8 +4,8 @@ require 'spec_helper'
 RSpec.describe User, type: :model do
   subject do
     described_class.new(
-      password: "password",
-      email: "john@doe.com"
+      password: Faker::Internet.password(min_length: 6),
+      email: Faker::Internet.email
     )
   end
 
@@ -22,42 +22,6 @@ RSpec.describe User, type: :model do
 
     it "is not valid without an email" do
       subject.email = "johndoe"
-      expect(subject).to_not be_valid
-    end
-  end
-end
-
-RSpec.describe Shift, type: :model do
-  subject do
-    described_class.new(
-      employee_name: "johndoe",
-      start: DateTime.now,
-      finish: DateTime.now + 3.hours,
-      break_length: 10 )
-  end
-  describe "Validations" do
-
-    it "is valid with valid attributes" do
-      expect(subject).to be_valid
-    end
-
-    it "is not valid without an employee_name" do
-      subject.employee_name = nil
-      expect(subject).to_not be_valid
-    end
-
-    it "is not valid without a start" do
-      subject.start = nil
-      expect(subject).to_not be_valid
-    end
-
-    it "is not valid without a finish" do
-      subject.finish = nil
-      expect(subject).to_not be_valid
-    end
-
-    it "is not valid without a break_length" do
-      subject.break_length = nil
       expect(subject).to_not be_valid
     end
   end

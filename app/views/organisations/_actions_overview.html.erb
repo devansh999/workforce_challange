@@ -1,4 +1,4 @@
-<h1><%= current_user.organisation.name %></h1>
+<h1>Organisation Name: <%= current_user.organisation.name %></h1>
 
 <%= link_to "View Shifts", shifts_path(@shifts) %>
 <%= link_to "Edit", edit_organisation_path(current_user.organisation) %>
