@@ -1,5 +1,5 @@
 class Organisation < ApplicationRecord
-	validates :name, presence: true
+	validates_presence_of :name, :hourly_rate
 
   def users
   	User.where(organisation_id: id)
