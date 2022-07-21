@@ -12,7 +12,8 @@ class OrganisationsController < ApplicationController
     if @organisation.save
       redirect_to @organisation, notice: "Successfully created organisation"
     else
-      render json: {message: @organisation.errors.full_messages.join("<br>") }, status: :unprocessable_entity
+      @organisations = Organisation.all
+      render :index, status: :unprocessable_entity
     end
   end
 
