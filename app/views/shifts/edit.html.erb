@@ -1,0 +1,35 @@
+<h1>Adnat</h1>
+
+<h2>Edit Shift</h2>
+
+<%= form_with model: @shift do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :employee_name %>
+  </div>
+
+  <div>
+    <%= form.label :Start_Date %><br>
+    <%= form.date_field :start %>
+  </div>
+
+  <div>
+    <%= form.label :Start_Time %><br>
+    <%= form.time_field :start %>
+  </div>
+
+  <div>
+    <%= form.label :Finish_Time %><br>
+    <%= form.time_field :finish %>
+  </div>
+
+  <div>
+    <%= form.label :Break_Length_in_minutes %><br>
+    <%= form.number_field :break_length %>
+  </div>
+
+  <br>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

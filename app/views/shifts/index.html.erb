@@ -3,7 +3,7 @@
 <h2>Organisation Name : <%= current_user.organisation&.name %></h2>
 
 <br>
-<p>Serch by name :- </p>
+<p>Search by name :- </p>
 <form action="<%= search_shifts_path %>" data-turbo-frame="shifts_frame"    >
   <%= text_field_tag :employee_name, "", id: "search_employee_name" %>
   <%= submit_tag "Search", id: "formSubmit" %>
@@ -34,6 +34,8 @@
           <td><%= shift.break_length %></td>
           <td><%= shift.hours_worked %></td>
           <td><%= shift.cost %>$</td>
+          <td><%= link_to "Edit", edit_shift_path(shift) %></td>
+          <td><%= link_to "Delete", shift_path(shift), data: { turbo_method: :delete, turbo_confirm: :'Are you sure ?' } %></td>
         </tr>
       <% end %>
 
@@ -43,7 +45,7 @@
           </td>
         <td><%= date_field_tag :start_date, nil, required: true %></td>
         <td><%= time_field_tag :start_time, nil, required: true %></td>
-        <td><%= time_field_tag :finish, nil, required: true %></td>
+        <td><%= datetime_field_tag :finish, nil, required: true %></td>
         <td><%= number_field_tag :break_length, nil, required: true %></td>
         <td colspan="2">
           <button onclick="submitForm()">Save Shift</button>

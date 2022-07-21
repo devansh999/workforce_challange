@@ -23,15 +23,28 @@ class ShiftsController < ApplicationController
     end
   end
 
+  def edit
+    @shift = Shift.find(params[:id])
+  end
+
+  def update
+    @shift = Shift.find(params[:id])
+    if @shift.update(shift_params)
+      redirect_to @shifts, notice: "Successfully updated shift"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @shift = Shift.find(params[:id])
     @shift.destroy
-    redirect_to root_path, status: :see_other, notice: "Successfully destroyed organisation"
+    redirect_to shifts_path, status: :see_other, notice: "Successfully destroyed organisation"
   end
 
-def search
-  @shifts = Shift.where(employee_name: params[:employee_name])
-end
+  def search
+    @shifts = Shift.where(employee_name: params[:employee_name])
+  end
 
   private
 
