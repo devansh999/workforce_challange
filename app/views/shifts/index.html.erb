@@ -4,7 +4,7 @@
 
 <br>
 <p>Search by name :- </p>
-<form action="<%= search_shifts_path %>" data-turbo-frame="shifts_frame"    >
+<form action="<%= search_shifts_path %>" data-turbo-frame="shifts_frame">
   <%= text_field_tag :employee_name, "", id: "search_employee_name" %>
   <%= submit_tag "Search", id: "formSubmit" %>
   <br>
@@ -41,7 +41,7 @@
 
     <tr id="shift_row">
 
-        <td><%= text_field_tag :employee_name, current_user.name %>
+        <td><%= text_field_tag :employee_name, current_user.name, disabled: true %>
           </td>
         <td><%= date_field_tag :start_date, nil, required: true %></td>
         <td><%= time_field_tag :start_time, nil, required: true %></td>
