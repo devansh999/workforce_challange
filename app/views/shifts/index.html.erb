@@ -13,7 +13,7 @@
 
 
   <turbo-frame id="shifts_frame">
-  <table class="table table-bordered" border="2" id="shift_table">
+  <table class="table table-bordered" border="2" id="shift_table" >
     <tr>
       <th>Employee Name</th>
       <th>Shift Date</th>
@@ -34,7 +34,6 @@
           <td><%= shift.break_length %></td>
           <td><%= shift.hours_worked %></td>
           <td><%= shift.cost %>$</td>
-          <td><%= link_to "Edit", edit_shift_path(shift) %></td>
           <td><%= link_to "Delete", shift_path(shift), data: { turbo_method: :delete, turbo_confirm: :'Are you sure ?' } %></td>
         </tr>
       <% end %>
