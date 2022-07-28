@@ -1,5 +1,3 @@
-<h1>Adnat</h1>
-
 <h2>Organisation Name : <%= current_user.organisation&.name %></h2>
 
 <br>
@@ -34,6 +32,7 @@
           <td><%= shift.break_length %></td>
           <td><%= shift.hours_worked %></td>
           <td><%= shift.cost %>$</td>
+          <td><%= link_to "Edit", edit_shift_path(shift) %></td>
           <td><%= link_to "Delete", shift_path(shift), data: { turbo_method: :delete, turbo_confirm: :'Are you sure ?' } %></td>
         </tr>
       <% end %>
