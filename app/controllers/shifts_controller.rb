@@ -16,7 +16,8 @@ class ShiftsController < ApplicationController
         finish: @shift.finish.strftime("%I:%M %p"),
         break_length: @shift.break_length,
         cost: @shift.cost,
-        hours_worked: @shift.hours_worked
+        hours_worked: @shift.hours_worked,
+        id: @shift.id
       }
     else
       render json: {message: @shift.errors.full_messages.join("<br>") }, status: :unprocessable_entity

@@ -32,7 +32,6 @@
           <td><%= shift.break_length %></td>
           <td><%= shift.hours_worked %></td>
           <td><%= shift.cost %>$</td>
-          <td><%= link_to "Edit", edit_shift_path(shift) %></td>
           <td><%= link_to "Delete", shift_path(shift), data: { turbo_method: :delete, turbo_confirm: :'Are you sure ?' } %></td>
         </tr>
       <% end %>
@@ -86,7 +85,7 @@
           "</td><td>"+response.break_length+
           "</td><td>"+response.hours_worked+
           "</td><td>"+response.cost+
-          "</td></tr>"
+          "$</td><td><a data-turbo-method='delete' data-turbo-confirm='Are you sure ?' href='shifts/"+response.id+"'>Delete</a></td></tr>"
         ).insertBefore($("#shift_row"));
         $("#Shift_errors").html("")
       },
